@@ -1,11 +1,5 @@
 package com.example.demo;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.sql.Date;
-import java.util.Calendar;
+import java.io.*;
 import java.util.Scanner;
 
 import javax.servlet.http.HttpServletResponse;
@@ -20,12 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-public class DemoApplication {
+public class Server {
 
     public static void main(String[] args) throws IOException {
     	//write_file("ASDFFFF");
     	//append_file("1234.txt", "fsdasdadasdsadsad");
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(Server.class, args);
+        String files[] = fileReturn();
     }
     
     //working
@@ -92,6 +87,24 @@ public class DemoApplication {
         //Example URL http://localhost:8080/loadFile?id=1234
         
     }
-    
-    
+
+    // Returns an array of all text files in current directory
+    @RequestMapping("/getFiles")
+    @ResponseBody
+    public static String[] fileReturn() {
+        String[] pathnames;
+        File f = new File(System.getProperty("user.dir"));
+        FilenameFilter filter = new FilenameFilter() {
+            @Override
+            public boolean accept(File f, String name) {
+                return name.endsWith(".txt");
+            }
+        };
+
+        pathnames = f.list(filter);
+        for (String pathname : pathnames) {
+            System.out.println(pathname);
+        }
+        return pathnames;
+    }
 }
