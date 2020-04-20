@@ -1,0 +1,21 @@
+var filenames = fetch("http://localhost:8080/getFiles");
+
+console.log(filenames);
+
+function makeList() {
+    var list = document.createElement('ul');
+
+    for(var i = 0; i < filenames.length; i++) {
+        // Create the list item:
+        var item = document.createElement('li');
+
+        // Set its contents:
+        item.appendChild(document.createTextNode(array[i]));
+
+        // Add it to the list:
+        list.appendChild(item);
+    }
+
+    // Finally, return the constructed list:
+    return list;
+}
