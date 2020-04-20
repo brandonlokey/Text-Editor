@@ -1,4 +1,4 @@
-package com.example.demo.com.example.demo;
+package com.example.demo;
 
 public class file {
 	public int id;
