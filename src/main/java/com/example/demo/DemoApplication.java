@@ -87,7 +87,6 @@ public class DemoApplication {
     public void loadFile(HttpServletResponse response, @RequestParam("id") String id) throws IOException {
        
         String fileName = id + ".txt";
-        
         String data = load_file(fileName);
         response.getWriter().println(data);
         //Example URL http://localhost:8080/loadFile?id=1234
