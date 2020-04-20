@@ -6,19 +6,16 @@ async function getFileList(notes) {
     console.log(notes);
 
     var list = document.createElement('ul');
-
-    listContainer = document.createElement('div');
-    listElement = document.createElement('ul');
     numItems = notes.length;
 
-    document.getElementsByTagName('body')[0].appendChild(listContainer);
-    listContainer.appendChild(listElement);
-
-    for (var i = 0; i <numItems; ++i) {
-        listItem = document.createElement('li');
-
-        listItem.innerHTML = notes[i];
-    }
+    notes.forEach(function (note)
+    {
+        var li = document.createElement('li');
+        li.innerHTML = "<a href='index.html'>" + note + "</a>";
+        list.appendChild(li);
+    })
+    var container = document.querySelector('#list');
+    container.appendChild(list);
 }
 
 getFileList();
