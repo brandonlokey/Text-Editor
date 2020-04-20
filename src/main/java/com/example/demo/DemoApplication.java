@@ -1,13 +1,10 @@
 package com.example.demo;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.Calendar;
-
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -43,12 +40,11 @@ public class DemoApplication {
         writer.close();
     	
     }
-    
+
     @RequestMapping("/greeting")
     public void testFunc() {
         System.out.println("This is a test");
     }
-    
     
     @RequestMapping("/writeFile")
     @CrossOrigin(maxAge = 3600)
@@ -62,5 +58,4 @@ public class DemoApplication {
         //Example URL http://localhost:8080/writeFile?id=2345&body=abc
         
     }
-    
 }
