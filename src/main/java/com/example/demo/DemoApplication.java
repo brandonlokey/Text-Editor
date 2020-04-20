@@ -8,8 +8,12 @@ import java.util.Calendar;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 
 @SpringBootApplication
+@RestController
 public class DemoApplication {
 
     public static void main(String[] args) throws IOException {
@@ -17,8 +21,6 @@ public class DemoApplication {
     	//append_file("1234.txt", "fsdasdadasdsadsad");
         SpringApplication.run(DemoApplication.class, args);
     }
-
-    
     
     //working
     public static void write_new(String body) throws IOException {
@@ -38,5 +40,11 @@ public class DemoApplication {
         writer.close();
     	
     }
+    
+    @RequestMapping("/greeting")
+    public void testFunc() {
+        System.out.println("This is a test");
+    }
+    
     
 }
