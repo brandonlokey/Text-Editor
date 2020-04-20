@@ -3,13 +3,13 @@ import java.io.*;
 import java.util.Scanner;
 
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 
 @SpringBootApplication
@@ -20,7 +20,6 @@ public class Server {
     	//write_file("ASDFFFF");
     	//append_file("1234.txt", "fsdasdadasdsadsad");
         SpringApplication.run(Server.class, args);
-        String files[] = fileReturn();
     }
     
     //working
@@ -88,10 +87,13 @@ public class Server {
         
     }
 
-    // Returns an array of all text files in current directory
-    @RequestMapping("/getFiles")
+    /* Returns a json of all text files in currently in directory
+        Currently retrieves names of text files correctly, not returning JSON yet
+     */
+    @RequestMapping(path = "/getFiles", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public static String[] fileReturn() {
+    public static JsonArray fileReturn() {
         String[] pathnames;
         File f = new File(System.getProperty("user.dir"));
         FilenameFilter filter = new FilenameFilter() {
@@ -102,9 +104,15 @@ public class Server {
         };
 
         pathnames = f.list(filter);
+
         for (String pathname : pathnames) {
             System.out.println(pathname);
         }
-        return pathnames;
+
+        JsonArray json_array= new JsonArray();
+        for (int i = 0; i < pathnames.length; i++) {
+            json_array.add(pathnames[i]);
+        }
+        return json_array;
     }
 }
