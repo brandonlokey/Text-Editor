@@ -1,9 +1,13 @@
 package com.example.demo;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.Scanner;
+
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -40,6 +44,24 @@ public class DemoApplication {
         writer.close();
     	
     }
+    
+    public static String load_file(String id) throws FileNotFoundException {
+    	File curFile = new File(id);
+    	String data = "";
+    	try {
+			Scanner fr = new Scanner(curFile);
+			while(fr.hasNextLine()) {
+				return data = data + fr.nextLine();
+			}
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			data = "There was an error";
+		}
+		return data;
+    	
+    }
 
     @RequestMapping("/greeting")
     public void testFunc() {
@@ -49,7 +71,7 @@ public class DemoApplication {
     @RequestMapping("/writeFile")
     @CrossOrigin(maxAge = 3600)
     @ResponseBody
-    public void putUser(HttpServletResponse response, @RequestParam("id") String id,
+    public void writeFile(HttpServletResponse response, @RequestParam("id") String id,
                         @RequestParam("body") String body) throws IOException {
         response.getWriter().println("SUCCESS");
         String fileName = id + ".txt";
@@ -58,4 +80,19 @@ public class DemoApplication {
         //Example URL http://localhost:8080/writeFile?id=2345&body=abc
         
     }
+    
+    @RequestMapping("/loadFile")
+    @CrossOrigin(maxAge = 3600)
+    @ResponseBody
+    public void loadFile(HttpServletResponse response, @RequestParam("id") String id) throws IOException {
+       
+        String fileName = id + ".txt";
+        
+        String data = load_file(fileName);
+        response.getWriter().println(data);
+        //Example URL http://localhost:8080/loadFile?id=1234
+        
+    }
+    
+    
 }
