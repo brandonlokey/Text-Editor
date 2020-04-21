@@ -110,4 +110,15 @@ public class Server {
         }
         return pathnames;
     }
+
+    @GetMapping("/deleteFile")
+    @ResponseBody
+    public static void deleteFile(HttpServletResponse response, String id) throws IOException {
+        String filename = id + ".txt";
+        File file = new File(filename);
+        if (file.delete()) {
+            response.getWriter().println("FILE DELETE SUCCESS");
+        }
+    }
 }
+
