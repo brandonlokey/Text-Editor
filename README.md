@@ -1,12 +1,12 @@
 # Practicum-Final-Project
 
- - You can access the S3 bucket hosted website here:
+* You can access the S3 bucket hosted website here:
 http://practinote.s3-website-us-east-1.amazonaws.com/
 
-- You will need to clone the repo locally and run Server.java for the site to function correctly as it still references localhost / loop backs.
+* You will need to clone the repo locally and run Server.java for the site to function correctly as it still references localhost / loop backs.
 https://github.com/gourmetpez/Practicum-Final-Project
 
-The reason why EC2 is not hosting the server files is because I have had issues in the past with Amazon and had them essentially disable my services, this should have been cleared up, however, there still seemed to be strange routing issues with connecting to my instances. Since I do not have this hosted, I can present the steps I would take if it were not for these issues.
+* The reason why EC2 is not hosting the server files is because I have had issues in the past with Amazon and had them essentially delete any services that I had running. This was to prevent them from billing me. It seems that since I made these changes they deleted the default VPC, Security Groups, and routing. Even though I recreated these I still was unable to connect to a Windows box or Linux box to run the server on. Since I do not have this hosted, I can present the steps I would take if it were not for these issues.
 
 1) Start up a Windows EC2 instance
 2) Install Java and Eclipse on this new instance
