@@ -21,7 +21,6 @@ async function getFileList(notes) {
 			//console.log(data); 
 			li.innerHTML = "<a href='index.html?&filename=" + id + "&body=" + data.body + "'>" + note + "</a>";
 			
-			
 			list.appendChild(li);
 		  });		
     })
