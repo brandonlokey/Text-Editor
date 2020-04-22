@@ -12,12 +12,13 @@
 <body style="background-color: chartreuse">
     <center>
         <form action="http://localhost:8080/writeFile?" id="usrform">
-            Filename: <input type="text" name="id">
+            Filename: <input type="text" id="curFile" name="id" value="">
             <input type="submit">
             <input type="submit" value="Delete" formaction="http://localhost:8080/deleteFile?">
         </form>
 
-        <textarea name="body" form="usrform" rows="20" cols="100"></textarea>
+        <textarea name="body" form="usrform" rows="20" cols="100" name="body" id="body" value=""></textarea>
+        <script src="paramgrabber.js"></script>
     </center>
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.example.demo;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
@@ -81,11 +83,12 @@ public class Server {
     @RequestMapping("/loadFile")
     @CrossOrigin(maxAge = 3600)
     @ResponseBody
-    public void loadFile(HttpServletResponse response, @RequestParam("id") String id) throws IOException {
+    public String loadFile(HttpServletResponse response, @RequestParam("id") String id) throws IOException {
 
         String fileName = id + ".txt";
         String data = load_file(fileName);
-        response.getWriter().println(data);
+        //response.getWriter().println(data);
+        return data;
         //Example URL http://localhost:8080/loadFile?id=1234
 
     }
@@ -111,6 +114,7 @@ public class Server {
         return pathnames;
     }
 
+    // Deletes file that user enters
     @GetMapping("/deleteFile")
     @ResponseBody
     public static void deleteFile(HttpServletResponse response, String id) throws IOException {
@@ -118,7 +122,22 @@ public class Server {
         File file = new File(filename);
         if (file.delete()) {
             response.getWriter().println("FILE DELETE SUCCESS");
+            System.out.println("File deleted");
         }
+    }
+
+    // Returns body of txt file
+    @GetMapping("/getBody")
+    @ResponseBody
+    public static String getBody(HttpServletResponse response, @RequestParam("id") String id) {
+        String text = "";
+        String filename = id + ".txt";
+        try {
+            text = new String(Files.readAllBytes(Paths.get(filename)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return text;
     }
 }
 
